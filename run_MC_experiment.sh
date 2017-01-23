@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp atari_uct/cmake-build-release/atari_uct /tmp
+cp atari_uct/build/atari_uct /tmp
 
 for i in `seq 1 8`;
 do
