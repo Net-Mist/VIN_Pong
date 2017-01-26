@@ -31,10 +31,32 @@ for label in label_dir:
         print(simulation_id, frame_nb, action_indice, y_player, y_opponent, x_b, y_b)
         duration = time.time() - start_time
         print(duration)
+np.save('../data_unsorted.npy', np.array(data))
+
+# Sort the data by simulation
+data = np.array(data)
+ind_sort = np.argsort(data[:, 0])
+data = data[ind_sort]
+
+# For each simulation sort data by frame nb
+output = []
+for i in range(1, 9):
+    a1 = np.array([l for l in data if l[0] == i])
+    b = np.argsort(a1[:, 1])
+    a1 = a1[b]
+    output += a1.tolist()
+output = np.array(output)
+np.save('../data_sorted.npy', np.array(output))
+
+# Add the position of the ball two frame before to the data
+output2 = np.zeros((output.shape[0], output.shape[1]+2), dtype='int')
+output2[:, :7] = output
+output2[2:, 7:] = output[:-2, 5:]
+np.save('../data.npy', np.array(output2))
 
 
 
 
 
 
-# np.save('../dataset.npy', data)
+
