@@ -1,4 +1,6 @@
 import time
+from PIL import Image
+import sys
 from image_preprocess import *
 
 block_size = 8  # Should be a divisor of 160
@@ -23,9 +25,9 @@ start_time = time.time()
 
 # load the image
 image = Image.open(sys.argv[1])
-y_player, y_opponent, x_b, y_b, player_position_distribution, opponent_position_distribution, ball_position_distribution = process(
+y_player, y_opponent, x_b, y_b, player_distribution, opponent_distribution, ball_distribution = process(
     image)
 duration = time.time() - start_time
 print(duration)
 print(y_player, y_opponent, x_b, y_b)
-print_grid(ball_position_distribution, player_position_distribution, opponent_position_distribution)
+print_grid(ball_distribution, player_distribution, opponent_distribution)

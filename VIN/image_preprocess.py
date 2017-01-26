@@ -1,6 +1,4 @@
 import numpy as np
-from PIL import Image
-import sys
 
 # Size of the bare = 16
 # Size of the ball = 4*2
@@ -81,18 +79,18 @@ def process(image):
     opponent_area = image.crop((17, 34, 18, 194))  # Size : 1 * 160
     player_area = image.crop((141, 34, 142, 194))  # Size : 1 * 160
 
-    player_position_distribution = np.zeros(number_blocks, dtype='int')
-    opponent_position_distribution = np.zeros(number_blocks, dtype='int')
-    ball_position_distribution = np.zeros((number_blocks, number_blocks), dtype='int')
+    player_distribution = np.zeros(number_blocks, dtype='int')
+    opponent_distribution = np.zeros(number_blocks, dtype='int')
+    ball_distribution = np.zeros((number_blocks, number_blocks), dtype='int')
     # Find the positions distributions
-    fill_position_distribution_1d(player_position_distribution, np.array(player_area)[:, 0, :], mean_player)
-    fill_position_distribution_1d(opponent_position_distribution, np.array(opponent_area)[:, 0, :], mean_opponent)
-    fill_position_distribution_2d(ball_position_distribution, np.array(ball_area), mean_ball)
+    fill_position_distribution_1d(player_distribution, np.array(player_area)[:, 0, :], mean_player)
+    fill_position_distribution_1d(opponent_distribution, np.array(opponent_area)[:, 0, :], mean_opponent)
+    fill_position_distribution_2d(ball_distribution, np.array(ball_area), mean_ball)
 
     # Find the positions
-    y_player = np.argmax(player_position_distribution)
-    y_opponent = np.argmax(opponent_position_distribution)
-    y_b = np.argmax(np.sum(ball_position_distribution, 1))
-    x_b = np.argmax(np.sum(ball_position_distribution, 0))
+    y_player = np.argmax(player_distribution)
+    y_opponent = np.argmax(opponent_distribution)
+    y_b = np.argmax(np.sum(ball_distribution, 1))
+    x_b = np.argmax(np.sum(ball_distribution, 0))
 
-    return y_player, y_opponent, x_b, y_b, player_position_distribution, opponent_position_distribution, ball_position_distribution
+    return y_player, y_opponent, x_b, y_b, player_distribution, opponent_distribution, ball_distribution
