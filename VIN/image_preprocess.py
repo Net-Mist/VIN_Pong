@@ -95,5 +95,4 @@ def process(image):
     y_b = np.argmax(np.sum(ball_position_distribution, 1))
     x_b = np.argmax(np.sum(ball_position_distribution, 0))
 
-    return y_player, y_opponent, x_b, y_b
-
+    return y_player, y_opponent, x_b, y_b, player_position_distribution, opponent_position_distribution, ball_position_distribution
