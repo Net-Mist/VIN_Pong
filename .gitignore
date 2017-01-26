@@ -1,4 +1,5 @@
 atari_uct/build/
 dataset/
 outputs_12h_1000_100/
-
+VIN/.idea
+VIN/__pycache__/
