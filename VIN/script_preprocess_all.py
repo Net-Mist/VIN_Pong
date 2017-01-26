@@ -25,7 +25,7 @@ for label in label_dir:
         frame_nb = int(tmp[1])
 
         image = Image.open(f)
-        y_player, y_opponent, x_b, y_b = process(image)
+        y_player, y_opponent, x_b, y_b, _, _, _ = process(image)
 
         data.append([simulation_id, frame_nb, action_indice, y_player, y_opponent, x_b, y_b])
         print(simulation_id, frame_nb, action_indice, y_player, y_opponent, x_b, y_b)
@@ -49,14 +49,7 @@ output = np.array(output)
 np.save('../data_sorted.npy', np.array(output))
 
 # Add the position of the ball two frame before to the data
-output2 = np.zeros((output.shape[0], output.shape[1]+2), dtype='int')
+output2 = np.zeros((output.shape[0], output.shape[1] + 2), dtype='int')
 output2[:, :7] = output
 output2[2:, 7:] = output[:-2, 5:]
 np.save('../data.npy', np.array(output2))
-
-
-
-
-
-
-
