@@ -79,7 +79,9 @@ def inference(y_player_placeholder: tf.placeholder, other_information_placeholde
             r = tf.nn.relu(tf.matmul(hidden, weights) + biases)
 
     # Value iteration part
-    v = tf.fill(tf.shape(hidden), 0.0)
+    v = tf.fill(tf.shape(r), 0.0)
+    v = tf.expand_dims(v, 2)
+    r = tf.expand_dims(r, 2)
     with tf.variable_scope('vi') as scope:
         for irec in range(k_rec):
             with tf.name_scope('iter%d' % irec):

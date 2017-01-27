@@ -76,6 +76,7 @@ def get_random_cached_images(image_lists: {}, how_many: int, category: str, bloc
 
     y_player = []
     other = []
+    labels = []
     for _ in range(how_many):
         # randomly chose the class among all
         label_index = random.randrange(3)
@@ -88,8 +89,9 @@ def get_random_cached_images(image_lists: {}, how_many: int, category: str, bloc
         # ground_truth = np.zeros(class_count, dtype=np.float32)
         # ground_truth[label_index] = 1.0
         y_player_vector = np.zeros(block_number)
-        y_player_vector[y_player] = 1
+        y_player_vector[state[0]] = 1
         other.append(state[1:])
         y_player.append(y_player_vector)
+        labels.append(label_index)
 
-    return y_player, other
+    return y_player, other, labels
